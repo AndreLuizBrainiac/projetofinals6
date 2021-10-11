@@ -3,14 +3,43 @@ import { DataFormComponent } from './data-form/data-form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [
+import { LoginComponent } from './login/login.component';
+import { DataGuard } from './guards/data.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { HomeComponent } from './home/home.component';
+
+
+const appRoutes: Routes = [
  
-  { path: 'dataForm', component: DataFormComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'dataForm' }
+ // { path: 'dataForm', 
+//    loadChildren: 'app/data-form/data-form.module#DataFormModule',
+ //   canActivate: [AuthGuard],
+//  },
+ 
+ // { path: '', pathMatch: 'full', redirectTo: 'dataForm' },
+  { path: 'login', component: LoginComponent },
+
+//  {path: '', component: DataFormComponent,
+//    canActivate: [AuthGuard]
+//  },
+
+  { path: '', component: HomeComponent,
+  canActivate: [AuthGuard] 
+  },
+
+  { path: 'home', component: HomeComponent,
+  canActivate: [AuthGuard] 
+  },
+
+
+  { path: 'dataForm', loadChildren: () => import('./data-form/data-form.module').then(m => m.DataFormModule) },
+
+  { path: '**', component: PaginaNaoEncontradaComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

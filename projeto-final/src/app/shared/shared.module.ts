@@ -27,7 +27,10 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     CampoControlErroComponent,
     ErrorMsgComponent,
     InputFieldComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    ConfirmModalComponent
+
+    
   ],
   providers: [ DropdownService ]
 })

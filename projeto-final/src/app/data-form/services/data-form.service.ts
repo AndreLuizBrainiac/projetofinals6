@@ -24,6 +24,6 @@ export class DataFormService {
 
   save(usuarioCadastro:any) {
   
-    return this.create(usuarioCadastro);
+    return this.create(usuarioCadastro).pipe(take(1));
   }
 }

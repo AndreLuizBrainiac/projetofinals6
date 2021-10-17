@@ -110,7 +110,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     let msgSuccess = 'Usuário criado com sucesso!';
     let msgError = 'Erro ao criar Usuario, tente novamente!';
 
-
+    
     // CHAMA PARA O SERVICE QUE UTILIZA A API DO PROJETO
     this.dataformService.save(valueSubmit).subscribe(
       success => {
@@ -120,7 +120,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
       },
       error => this.modal.showAlertDanger(msgError)
     );
-
+      
     
 
     // TESTE COM API FICTICIA PARA VER SE O POST ESTÁ FUNCIONANDO
@@ -136,7 +136,10 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
           },
           (error: any) => alert('erro')
         );
-        */
+
+     */
+
+        
   }
 
   consultaCEP() {

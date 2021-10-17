@@ -22,7 +22,6 @@
           "options": {
             "outputPath": "dist/projeto-final",
             "index": "src/index.html",
-            "baseHref": "/projeto-final/",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",

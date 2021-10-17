@@ -21,7 +21,7 @@ export class DataFormService {
     let endPoint = 'usuarioCadastro';
     console.log(this.API+endPoint)
     console.log(JSON.stringify(usuarioCadastro));
-    return this.http.post( `${this.API}${endPoint}`, JSON.stringify(usuarioCadastro)).pipe(take(1));
+    return this.http.post( this.API+endPoint, JSON.stringify(usuarioCadastro)).pipe(take(1));
   }
 
   save(usuarioCadastro:any) {

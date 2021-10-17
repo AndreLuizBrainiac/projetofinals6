@@ -60,6 +60,8 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
       email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
       confirmarEmail: [null, [Validators.required, FormValidations.equalsTo('email')]],
       senha: [null, [Validators.required, Validators.minLength(3)]],
+      documento: [null, [Validators.required, Validators.minLength(5)]],
+      tel: [null, [Validators.required, Validators.minLength(3)]],
 
 
       endereco: this.formBuilder.group({

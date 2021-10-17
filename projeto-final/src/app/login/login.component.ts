@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
 
     //CHAMADA DO SERVIÇO PARA API DO PROJETO
     this.authService.fazerLogin(this.usuario);
+ 
   }
 
 }

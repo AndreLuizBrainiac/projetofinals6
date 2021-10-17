@@ -46,6 +46,28 @@
       
       </div>
     </div>
+
+    <div class="form-group" [ngClass]="aplicaCssErro('documento')">
+      <div class="col-sm-12">
+        <label for="documento" class="control-label">Documento</label>
+      </div>
+      <div class="col-sm-12">
+        <input type="text" class="form-control" formControlName="documento" id="documento" placeholder="ex 999.999...">
+        <app-error-msg [control]="$any(formulario.get('documento'))" label="Documento"></app-error-msg>
+      
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="aplicaCssErro('tel')">
+      <div class="col-sm-12">
+        <label for="tel" class="control-label">Tel</label>
+      </div>
+      <div class="col-sm-12">
+        <input type="tel" class="form-control" formControlName="tel" id="tel" placeholder="ex 11xxxxxx">
+        <app-error-msg [control]="$any(formulario.get('tel'))" label="Tel"></app-error-msg>
+      
+      </div>
+    </div>
   
     <div formGroupName="endereco">
   

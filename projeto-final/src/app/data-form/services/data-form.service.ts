@@ -19,6 +19,8 @@ export class DataFormService {
   //endPoint a ser utilizado na API
   private create(usuarioCadastro:any) {
     let endPoint = 'usuarioCadastro';
+    console.log(this.API+endPoint)
+    console.log(JSON.stringify(usuarioCadastro));
     return this.http.post( `${this.API}${endPoint}`, JSON.stringify(usuarioCadastro)).pipe(take(1));
   }
 

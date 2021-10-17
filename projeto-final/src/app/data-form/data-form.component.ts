@@ -105,13 +105,10 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
 
   submit() {
     this.submitted = true;
-    console.log(this.formulario);
 
     let valueSubmit = Object.assign({}, this.formulario.value);
     let msgSuccess = 'Usuário criado com sucesso!';
     let msgError = 'Erro ao criar Usuario, tente novamente!';
-
-    console.log(valueSubmit)
 
 
     // CHAMA PARA O SERVICE QUE UTILIZA A API DO PROJETO

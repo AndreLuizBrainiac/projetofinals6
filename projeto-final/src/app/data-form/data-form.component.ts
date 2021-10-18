@@ -114,6 +114,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     // CHAMA PARA O SERVICE QUE UTILIZA A API DO PROJETO
     this.dataformService.save(valueSubmit).subscribe(
       success => {
+      
         this.modal.showAlertSuccess(msgSuccess);
         this.location.back();
      //   this.location.reload();

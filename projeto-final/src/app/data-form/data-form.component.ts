@@ -17,6 +17,7 @@ import { Cidade } from '../shared/models/cidade';
 import { AlertModalService } from '../shared/alert-modal.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../login/auth.service';
+import { UsuarioCadastroDTO } from '../ModelDTO/UsuarioCadastroDTO';
 
 @Component({
   selector: 'app-data-form',
@@ -114,7 +115,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     // CHAMA PARA O SERVICE QUE UTILIZA A API DO PROJETO
     this.dataformService.save(valueSubmit).subscribe(
       success => {
-      
+        
         this.modal.showAlertSuccess(msgSuccess);
         this.location.back();
      //   this.location.reload();

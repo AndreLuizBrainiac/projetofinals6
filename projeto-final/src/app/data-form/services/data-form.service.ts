@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap, delay, take } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { UsuarioCadastroDTO } from 'src/app/ModelDTO/UsuarioCadastroDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,10 @@ export class DataFormService {
 
     let endPoint = 'usuarioCadastro';
     console.log(`${this.API}${endPoint}`);
-    console.log(JSON.stringify(usuarioCadastro));
+    console.log(usuarioCadastro);
     //CHAMADA ANTIGA
-   // return this.http.post(`${this.API}${endPoint}`, JSON.stringify(usuarioCadastro)).pipe(take(1));
-    return this.http.post(`http://cors-anywhere.herokuapp.com/${this.API}${endPoint}`, JSON.stringify(usuarioCadastro), {'headers':this.headers}).pipe(take(1));
+    return this.http.post<UsuarioCadastroDTO>(`${this.API}${endPoint}`, JSON.stringify(usuarioCadastro)).pipe(take(1));
+  //  return this.http.post(`http://cors-anywhere.herokuapp.com/${this.API}${endPoint}`, JSON.stringify(usuarioCadastro), {'headers':this.headers}).pipe(take(1));
   }
 
   save(usuarioCadastro:any) {

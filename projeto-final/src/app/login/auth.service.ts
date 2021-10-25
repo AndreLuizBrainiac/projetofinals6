@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
@@ -41,8 +41,21 @@ export class AuthService {
 
   //END POINT A SER UTILIZADO NA API
   private login(user: Usuario) {
-    let endPoint = 'userLogin';
-    return this.http.get<Usuario>(`${this.API}${endPoint}${'/'}${user.nome}`).pipe(take(1));
+    let endPoint = 'oauth/token';
+    let body = new HttpParams();
+    body = body.set('username', user.nome);
+    body = body.set('password', user.senha);
+    //Tipo de requisição de token de autenticação do back
+    body = body.set('grant_type', 'password'); 
+    return this.http.post<Usuario>(`${this.API}${endPoint}`,
+      body,
+        {
+          headers: {
+            //Autorização para poder receber o token de autenticação do back
+            Authorization: 'Basic Y2xpZW50OmNsaWVudA==',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).pipe(take(1));
   }
 
   fazerLogin(user: Usuario) {

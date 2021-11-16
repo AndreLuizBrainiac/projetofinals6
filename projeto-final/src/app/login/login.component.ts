@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     //console.log(this.usuario);
 
     //teste de login
-  //  this.authService.fazerLoginTeste(this.usuario);
+   // this.authService.fazerLoginTeste(this.usuario);
 
     //CHAMADA DO SERVIÇO PARA API DO PROJETO
     this.authService.fazerLogin(this.usuario);

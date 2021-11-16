@@ -14,15 +14,15 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './login/auth.service';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { DenunciasModule } from './denuncias/denuncias.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PaginaNaoEncontradaComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +31,7 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     AppRoutingModule,
    
+    DenunciasModule,
     DataFormModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),

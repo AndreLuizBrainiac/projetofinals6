@@ -8,6 +8,8 @@ import { DataGuard } from './guards/data.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { HomeComponent } from './home/home.component';
+import { CadastroDenunciaComponent } from './denuncias/cadastro-denuncia/cadastro-denuncia.component';
+import { ListaDenunciaComponent } from './denuncias/lista-denuncia/lista-denuncia.component';
 
 
 const appRoutes: Routes = [
@@ -25,11 +27,19 @@ const appRoutes: Routes = [
 //  },
 
   { path: '', component: HomeComponent,
-  canActivate: [AuthGuard] 
+    canActivate: [AuthGuard] 
   },
 
   { path: 'home', component: HomeComponent,
-  canActivate: [AuthGuard] 
+    canActivate: [AuthGuard] 
+  },
+
+  { path: 'cadastroDenuncia', component: CadastroDenunciaComponent,
+    canActivate: [AuthGuard] 
+  },
+
+  { path: 'lista-denuncia', component: ListaDenunciaComponent,
+    canActivate: [AuthGuard] 
   },
 
 

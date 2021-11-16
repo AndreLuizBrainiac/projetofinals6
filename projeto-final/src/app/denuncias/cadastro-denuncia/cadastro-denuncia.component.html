@@ -1,0 +1,31 @@
+<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+    <div class="form-group" [ngClass]="aplicaCssErro('titulo')">
+        <div class="col-sm-12">
+          <label for="titulo" class="control-label">Titulo</label>
+        </div>
+        <div class="col-sm-12">
+          <input type="text" class="form-control" formControlName="titulo" id="titulo" placeholder="ex: lixo na rua etc">
+          <app-error-msg [control]="$any(formulario.get('titulo'))" label="Título"></app-error-msg>
+        
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-sm-12">
+            <label for="explicarDenuncia">Expicar Denúncia</label>
+            <textarea class="form-control" formControlName="explicarDenuncia" placeholder="Explique sua denúncia, local, links de video ou fotos" id="explicarDenuncia" rows="22"></textarea>
+            <app-error-msg [control]="$any(formulario.get('explicarDenuncia'))" label="Expicar Denúncia"></app-error-msg>
+            <br>
+            
+           
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button> 
+    
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    <br>
+    <br>
+    
+</form>
+  

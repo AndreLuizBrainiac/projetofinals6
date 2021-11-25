@@ -14,6 +14,7 @@ export class AuthService {
   private API = `${environment.API}`;
 
   private usuarioAutenticado: boolean = false;
+  private usuario!: Usuario;
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
@@ -60,21 +61,23 @@ export class AuthService {
 
   fazerLogin(user: Usuario) {
 
-    this.login(user).subscribe((usuarioCadastrado: Usuario) => {
-      if (user.nome === usuarioCadastrado.nome &&
-        user.senha === usuarioCadastrado.senha) {
+    this.login(user).subscribe(
+    sucesso => {
+       this.usuario = user;
+       console.log(this.usuario);
 
-        this.usuarioAutenticado = true;
+       this.usuarioAutenticado = true;
 
-        this.mostrarMenuEmitter.emit(true);
+       this.mostrarMenuEmitter.emit(true);
+ 
+       this.router.navigate(['/']);
+ 
+    },
+    erro => {
+      this.usuarioAutenticado = false;
 
-        this.router.navigate(['/']);
+      this.mostrarMenuEmitter.emit(false);
 
-      } else {
-        this.usuarioAutenticado = false;
-
-        this.mostrarMenuEmitter.emit(false);
-      }
     });
 
   }
@@ -87,5 +90,9 @@ export class AuthService {
     this.usuarioAutenticado = false;
     console.log(this.usuarioAutenticado)
 
+  }
+
+  recuperarUsuario(){
+    return this.usuario;
   }
 }

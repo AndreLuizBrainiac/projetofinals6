@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { take } from 'rxjs/operators';
+import { AuthService } from 'src/app/login/auth.service';
+import { Usuario } from 'src/app/login/usuario';
 import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +14,19 @@ export class CadastroDenunciaService {
    // ir no diretório environment e mudar a url da API
    private  API = `${environment.API}`;
    private headers = new HttpHeaders({
+     "Authorization": "Basic " + btoa(`${this.authService.recuperarUsuario().nome}:${this.authService.recuperarUsuario().senha}`),
      "Content-Type": "application/json",
      "Accept": "application/json"
    });
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient, 
+    private authService: AuthService) { }
 
    //endPoint a ser utilizado na API
   private create(denunciaCadastro:any) {
 
-    let endPoint = 'cadastroDenuncia';
+    let endPoint = 'denuncia'
     console.log(`${this.API}${endPoint}`);
     console.log(denunciaCadastro);
     //TESTE API FAKE

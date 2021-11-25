@@ -3,6 +3,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AlertModalService } from '../shared/alert-modal.service';
 
 import { Usuario } from './usuario';
 
@@ -18,13 +19,15 @@ export class AuthService {
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
-  constructor(private router: Router,
-    private http: HttpClient) { }
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private modal: AlertModalService) { }
 
   //metodo local para testar login
   fazerLoginTeste(usuario: Usuario) {
 
-    if (usuario.nome === 'usuario@email.com' &&
+    if (usuario.email === 'usuario@email.com' &&
       usuario.senha === '123') {
 
       this.usuarioAutenticado = true;
@@ -44,41 +47,42 @@ export class AuthService {
   private login(user: Usuario) {
     let endPoint = 'oauth/token';
     let body = new HttpParams();
-    body = body.set('username', user.nome);
+    body = body.set('username', user.email);
     body = body.set('password', user.senha);
     //Tipo de requisição de token de autenticação do back
-    body = body.set('grant_type', 'password'); 
+    body = body.set('grant_type', 'password');
     return this.http.post<Usuario>(`${this.API}${endPoint}`,
       body,
-        {
-          headers: {
-            //Autorização para poder receber o token de autenticação do back
-            Authorization: 'Basic Y2xpZW50OmNsaWVudA==',
-            'Content-Type': 'application/x-www-form-urlencoded'
+      {
+        headers: {
+          //Autorização para poder receber o token de autenticação do back
+          Authorization: 'Basic Y2xpZW50OmNsaWVudA==',
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
-    }).pipe(take(1));
+      }).pipe(take(1));
   }
 
   fazerLogin(user: Usuario) {
 
     this.login(user).subscribe(
-    sucesso => {
-       this.usuario = user;
-       console.log(this.usuario);
+      sucess => {
+        this.usuario = user;
+        console.log(this.usuario);
 
-       this.usuarioAutenticado = true;
+        this.usuarioAutenticado = true;
 
-       this.mostrarMenuEmitter.emit(true);
- 
-       this.router.navigate(['/']);
- 
-    },
-    erro => {
-      this.usuarioAutenticado = false;
+        this.mostrarMenuEmitter.emit(true);
 
-      this.mostrarMenuEmitter.emit(false);
+        this.router.navigate(['/']);
 
-    });
+      },
+      error => {
+        this.modal.showAlertDanger(error)
+        this.usuarioAutenticado = false;
+
+        this.mostrarMenuEmitter.emit(false);
+
+      });
 
   }
 
@@ -92,7 +96,7 @@ export class AuthService {
 
   }
 
-  recuperarUsuario(){
+  getUsuario() {
     return this.usuario;
   }
 }

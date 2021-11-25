@@ -12,9 +12,10 @@ import { environment } from 'src/environments/environment';
 export class CadastroDenunciaService {
 
    // ir no diretório environment e mudar a url da API
+   private user:Usuario = this.authService.getUsuario();
    private  API = `${environment.API}`;
    private headers = new HttpHeaders({
-     "Authorization": "Basic " + btoa(`${this.authService.recuperarUsuario().nome}:${this.authService.recuperarUsuario().senha}`),
+     "Authorization": "Basic " + btoa(`${this.user.email}:${this.user.senha}`),
      "Content-Type": "application/json",
      "Accept": "application/json"
    });

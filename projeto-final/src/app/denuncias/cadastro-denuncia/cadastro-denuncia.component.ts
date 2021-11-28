@@ -36,7 +36,7 @@ export class CadastroDenunciaComponent extends BaseFormComponent implements OnIn
 
     this.formulario = this.formBuilder.group({
       titulo: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
-      explicarDenuncia: [null, [Validators.required, Validators.minLength(50)]]
+      descricao: [null, [Validators.required, Validators.minLength(50)]]
       
       
   

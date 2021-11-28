@@ -16,6 +16,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HomeComponent } from './home/home.component';
 import { DenunciasModule } from './denuncias/denuncias.module';
+import { DataFormEditModule } from './data-form-edit/data-form-edit.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DenunciasModule } from './denuncias/denuncias.module';
     LoginComponent,
     PaginaNaoEncontradaComponent,
     HomeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { DenunciasModule } from './denuncias/denuncias.module';
     HttpClientModule,
     AppRoutingModule,
    
+    DataFormEditModule,
     DenunciasModule,
     DataFormModule,
     BrowserAnimationsModule,

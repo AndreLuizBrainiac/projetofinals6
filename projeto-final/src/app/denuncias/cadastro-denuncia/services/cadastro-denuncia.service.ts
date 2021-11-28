@@ -15,6 +15,8 @@ export class CadastroDenunciaService {
    private user:Usuario = this.authService.getUsuario();
    private  API = `${environment.API}`;
    private headers = new HttpHeaders({
+     
+     
      "Authorization": "Basic " + btoa(`${this.user.email}:${this.user.senha}`),
      "Content-Type": "application/json",
      "Accept": "application/json"
@@ -22,7 +24,9 @@ export class CadastroDenunciaService {
 
   constructor(
     private http: HttpClient, 
-    private authService: AuthService) { }
+    private authService: AuthService) { 
+    //  console.log(this.authService.getUsuario().email);
+    }
 
    //endPoint a ser utilizado na API
   private create(denunciaCadastro:any) {

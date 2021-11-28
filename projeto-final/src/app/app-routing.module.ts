@@ -10,6 +10,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 import { HomeComponent } from './home/home.component';
 import { CadastroDenunciaComponent } from './denuncias/cadastro-denuncia/cadastro-denuncia.component';
 import { ListaDenunciaComponent } from './denuncias/lista-denuncia/lista-denuncia.component';
+import { DataFormEditComponent } from './data-form-edit/data-form-edit.component';
 
 
 const appRoutes: Routes = [
@@ -30,20 +31,29 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard] 
   },
 
+  
   { path: 'home', component: HomeComponent,
     canActivate: [AuthGuard] 
   },
+
 
   { path: 'cadastroDenuncia', component: CadastroDenunciaComponent,
     canActivate: [AuthGuard] 
   },
 
+
   { path: 'lista-denuncia', component: ListaDenunciaComponent,
+    canActivate: [AuthGuard] 
+  },
+  
+
+  { path: 'editar-cadastro', loadChildren: () => import('./data-form-edit/data-form-edit.module').then(m => m.DataFormEditModule),
     canActivate: [AuthGuard] 
   },
 
 
   { path: 'dataForm', loadChildren: () => import('./data-form/data-form.module').then(m => m.DataFormModule) },
+
 
   { path: '**', component: PaginaNaoEncontradaComponent }
 ];

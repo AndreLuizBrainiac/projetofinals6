@@ -30,6 +30,8 @@ export class AuthService {
     if (usuario.email === 'usuario@email.com' &&
       usuario.senha === '123') {
 
+      this.usuario = usuario;
+
       this.usuarioAutenticado = true;
 
       this.mostrarMenuEmitter.emit(true);
@@ -96,7 +98,7 @@ export class AuthService {
 
   }
 
-  getUsuario() {
+  getUsuario():Usuario {
     return this.usuario;
   }
 }

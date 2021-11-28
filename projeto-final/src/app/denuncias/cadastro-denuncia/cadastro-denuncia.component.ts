@@ -58,7 +58,7 @@ export class CadastroDenunciaComponent extends BaseFormComponent implements OnIn
         this.modal.showAlertSuccess(msgSuccess);
         this.location.back();
       },
-      error => this.modal.showAlertDanger(error)
+      error => this.modal.showAlertDanger(msgError)
     );
 
 

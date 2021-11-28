@@ -1,39 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-
-
 import { HttpClient } from '@angular/common/http';
-import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
-import { EstadoBr } from './../shared/models/estado-br.model';
-import { DropdownService } from './../shared/services/dropdown.service';
-import { ConsultaCepService } from '../shared/services/consulta-cep.service';
-import { DataFormService } from './services/data-form.service';
-import { Observable, empty, EMPTY } from 'rxjs';
-import { FormValidations } from '../shared/form-validations';
-import { VerificaEmailService } from './services/verifica-email.service';
-import { map, tap, distinctUntilChanged, switchMap, take } from 'rxjs/operators';
-import { BaseFormComponent } from '../shared/base-form/base-form.component';
-import { Cidade } from '../shared/models/cidade';
-import { AlertModalService } from '../shared/alert-modal.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { empty, EMPTY } from 'rxjs';
+import { distinctUntilChanged, tap, switchMap, map, take } from 'rxjs/operators';
+import { VerificaEmailService } from '../data-form/services/verifica-email.service';
 import { AuthService } from '../login/auth.service';
-import { UsuarioCadastroDTO } from '../ModelDTO/UsuarioCadastroDTO';
+import { AlertModalService } from '../shared/alert-modal.service';
+import { BaseFormComponent } from '../shared/base-form/base-form.component';
+import { FormType } from '../shared/base-form/form-type';
+import { FormValidations } from '../shared/form-validations';
+import { Cidade } from '../shared/models/cidade';
+import { EstadoBr } from '../shared/models/estado-br.model';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
+import { DropdownService } from '../shared/services/dropdown.service';
+import { DataFormEditService } from './services/data-form-edit.service';
 
 @Component({
-  selector: 'app-data-form',
-  templateUrl: './data-form.component.html',
-  styleUrls: ['./data-form.component.css']
+  selector: 'app-data-form-edit',
+  templateUrl: './data-form-edit.component.html',
+  styleUrls: ['./data-form-edit.component.css']
 })
-export class DataFormComponent extends BaseFormComponent implements OnInit {
-
+export class DataFormEditComponent extends BaseFormComponent implements OnInit {
+  
+  
   doSomething(): void {
     throw new Error('Method not implemented.');
   }
 
-
   estados!: EstadoBr[];
   cidades!: Cidade[];
   submitted = false;
+  formtype = FormType.EDIT;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,9 +39,8 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     private dropdownService: DropdownService,
     private cepService: ConsultaCepService,
     private verificaEmailService: VerificaEmailService,
-    private dataformService: DataFormService,
+    private dataformService: DataFormEditService,
     private modal: AlertModalService,
-    private location: Location,
     private router: Router,
     private authService: AuthService
   ) {
@@ -79,6 +76,20 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
 
     });
 
+    if(this.formtype==FormType.EDIT){
+
+     
+      this.dataformService.update().subscribe(
+        dados => {
+                  this.populaDadosFormEdit(dados);
+         
+        },
+
+        error =>  this.modal.showAlertDanger(error)
+      );
+
+    }
+
     this.formulario.get('endereco.cep')?.statusChanges
       .pipe(
         distinctUntilChanged(),
@@ -108,39 +119,20 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     this.submitted = true;
 
     let valueSubmit = Object.assign({}, this.formulario.value);
-    let msgSuccess = 'Usuário criado com sucesso!';
-    let msgError = 'Erro ao criar Usuario, tente novamente!';
+    let msgSuccess  = 'Usuário atualizado com sucesso!';
+    let msgError    = 'Erro ao atualizar o Usuario, tente novamente!';
 
     
     // CHAMA PARA O SERVICE QUE UTILIZA A API DO PROJETO
-    this.dataformService.save(valueSubmit).subscribe(
+    this.dataformService.update().subscribe(
       success => {
         
-        this.modal.showAlertSuccess(success as string);
-        this.location.back();
+        this.modal.showAlertSuccess(msgSuccess);
+       
      //   this.location.reload();
       },
-      error => this.modal.showAlertDanger(error)
+      error => this.modal.showAlertDanger(msgError)
     );
-      
-    
-
-    // TESTE COM API FICTICIA PARA VER SE O POST ESTÁ FUNCIONANDO
-    /*
-    this.http
-        .post('https://httpbin.org/post', JSON.stringify({}))
-        .subscribe(
-          dados => {
-            console.log(dados);
-            // reseta o form
-        
-             this.resetar();
-          },
-          (error: any) => alert('erro')
-        );
-
-     */
-
         
   }
 
@@ -151,6 +143,29 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
       this.cepService.consultaCEP(cep)
         .subscribe(dados => this.populaDadosForm(dados));
     }
+  }
+  
+  populaDadosFormEdit(dados: any) {
+
+    this.formulario.patchValue({
+      nome: dados.nome,
+      email: dados.email,
+      confirmarEmail: dados.confirmarEmail,
+      senha: dados.senha,
+      documento: dados.documento,
+      tel: dados.tel,
+
+      endereco: {
+        rua: dados.logradouro,
+        complemento: dados.complemento,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      },
+
+      termos: dados.termos
+    });
+
   }
 
   populaDadosForm(dados: any) {

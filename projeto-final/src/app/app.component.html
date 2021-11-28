@@ -21,15 +21,20 @@
         </li>
 
         <li routerLinkActive="active">
-          <a (click)="logout()">Sair</a>
-          
+          <a routerLink="/editar-cadastro">Editar minha conta</a>
         </li>
+
+        <li routerLinkActive="active">
+          <a (click)="logout()">Sair</a>
+        </li>
+
+        
 
          
       </ul>
     </div>
-  </nav>
+</nav>
   
-  <div class="container">
+<div class="container">
     <router-outlet></router-outlet>
-  </div>
+</div>

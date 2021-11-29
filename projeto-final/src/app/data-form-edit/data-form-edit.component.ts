@@ -72,12 +72,10 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
         estado: [null, Validators.required]
       }),
 
-      termos: [false, Validators.requiredTrue],
-
     });
 
     if(this.formtype==FormType.EDIT){
-
+      let msgError = 'Erro ao recuperar usuario!, tente mais tarde';
      
       this.dataformService.update().subscribe(
         dados => {
@@ -85,7 +83,7 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
          
         },
 
-        error =>  this.modal.showAlertDanger(error)
+        error =>  this.modal.showAlertDanger(msgError)
       );
 
     }
@@ -163,7 +161,6 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
         estado: dados.uf
       },
 
-      termos: dados.termos
     });
 
   }

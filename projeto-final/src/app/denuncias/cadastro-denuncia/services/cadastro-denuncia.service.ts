@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/login/auth.service';
 import { Usuario } from 'src/app/login/usuario';
+import { DenunciaCadastroDTO } from 'src/app/ModelDTO/DenunciaCadastroDTO';
 import { environment } from 'src/environments/environment';
 
 
@@ -15,7 +16,6 @@ export class CadastroDenunciaService {
    private user:Usuario = this.authService.getUsuario();
    private  API = `${environment.API}`;
    private headers = new HttpHeaders({
-     
      
      "Authorization": "Basic " + btoa(`${this.user.email}:${this.user.senha}`),
      "Content-Type": "application/json",
@@ -45,4 +45,20 @@ export class CadastroDenunciaService {
   
     return this.create(denunciaCadastro).pipe(take(1));
   }
+
+  private atualizar(codigo:any, denuncia:any){
+
+    console.log('codigo test= 3 '+codigo)
+    let endPoint = 'denuncia';
+    console.log(`${this.API}${endPoint}/${codigo}`);
+  
+    return this.http.put(`${this.API}${endPoint}/${codigo}`, JSON.stringify(denuncia), {'headers':this.headers});
+  }
+  
+   
+  update(codigo:any, denuncia:any){
+  
+    return this.atualizar(codigo, denuncia).pipe(take(1));
+  }
+  
 }

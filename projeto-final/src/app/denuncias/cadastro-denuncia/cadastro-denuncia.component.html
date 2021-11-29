@@ -1,31 +1,34 @@
-<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+<div class="menuCadDenuncia">
+  <form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
     <div class="form-group" [ngClass]="aplicaCssErro('titulo')">
-        <div class="col-sm-12">
-          <label for="titulo" class="control-label">Titulo</label>
-        </div>
-        <div class="col-sm-12">
-          <input type="text" class="form-control" formControlName="titulo" id="titulo" placeholder="ex: lixo na rua etc">
-          <app-error-msg [control]="$any(formulario.get('titulo'))" label="Título"></app-error-msg>
-        
-        </div>
+      <div class="col-sm-12">
+        <label for="titulo" class="control-label">Titulo</label>
+      </div>
+      <div class="col-sm-12">
+        <input type="text" class="form-control" formControlName="titulo" id="titulo" placeholder="ex: lixo na rua etc">
+        <app-error-msg [control]="$any(formulario.get('titulo'))" label="Título"></app-error-msg>
+
+      </div>
     </div>
-    
+
     <div class="form-group">
-        <div class="col-sm-12">
-            <label for="descricao">Expicar Denúncia</label>
-            <textarea class="form-control" formControlName="descricao" placeholder="Explique sua denúncia, local, links de video ou fotos" id="descricao" rows="22"></textarea>
-            <app-error-msg [control]="$any(formulario.get('descricao'))" label="Explicar Denúncia"></app-error-msg>
-            <br>
-            
-           
-        </div>
+      <div class="col-sm-12">
+        <label for="descricao">Expicar Denúncia</label>
+        <textarea class="form-control" formControlName="descricao"
+          placeholder="Explique sua denúncia, local, links de video ou fotos" id="descricao" rows="22"></textarea>
+        <app-error-msg [control]="$any(formulario.get('descricao'))" label="Explicar Denúncia"></app-error-msg>
+        <br>
+
+
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button> 
-    
-    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    <button style="margin-right: 15px;" type="submit" class="btn btn-primary">Submit</button>
+
+    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
     <br>
     <br>
-    
-</form>
-  
+
+  </form>
+</div>

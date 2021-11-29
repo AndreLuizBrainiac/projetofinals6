@@ -79,7 +79,7 @@ export class AuthService {
 
       },
       error => {
-        this.modal.showAlertDanger(error)
+        this.modal.showAlertDanger('Usuário ou senha invalido!')
         this.usuarioAutenticado = false;
 
         this.mostrarMenuEmitter.emit(false);

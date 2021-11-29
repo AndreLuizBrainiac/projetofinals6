@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { CadastroDenunciaComponent } from './denuncias/cadastro-denuncia/cadastro-denuncia.component';
 import { ListaDenunciaComponent } from './denuncias/lista-denuncia/lista-denuncia.component';
 import { DataFormEditComponent } from './data-form-edit/data-form-edit.component';
+import { FeedDeNoticiasComponent } from './feed-de-noticias/feed-de-noticias.component';
 
 
 const appRoutes: Routes = [
@@ -43,6 +44,10 @@ const appRoutes: Routes = [
 
 
   { path: 'lista-denuncia', component: ListaDenunciaComponent,
+    canActivate: [AuthGuard] 
+  },
+
+  { path: 'feed', component: FeedDeNoticiasComponent,
     canActivate: [AuthGuard] 
   },
   

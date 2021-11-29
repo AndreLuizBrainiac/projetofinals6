@@ -116,7 +116,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     this.dataformService.save(valueSubmit).subscribe(
       success => {
         
-        this.modal.showAlertSuccess(success as string);
+        this.modal.showAlertSuccess(msgSuccess);
         this.location.back();
      //   this.location.reload();
       },
@@ -200,7 +200,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
         console.log('cancelando cadastro')
         location.reload();
       }
-      );
+    );
 
 
     // console.log('onCancel');

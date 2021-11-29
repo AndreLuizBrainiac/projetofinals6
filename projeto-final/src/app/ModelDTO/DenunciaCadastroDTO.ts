@@ -1,7 +1,9 @@
 export class DenunciaCadastroDTO {
 
-    id: string | undefined;
+    codigo: string | undefined;
     titulo: string | undefined;
-    denuncia: string | undefined;
+    descricao: string | undefined;
+    codigo_pessoa: string | undefined;
+    status: string | undefined;
    
 }

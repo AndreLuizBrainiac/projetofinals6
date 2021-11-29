@@ -17,6 +17,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { HomeComponent } from './home/home.component';
 import { DenunciasModule } from './denuncias/denuncias.module';
 import { DataFormEditModule } from './data-form-edit/data-form-edit.module';
+import { ManterDadosService } from './services/manter-dados.service';
+import { FeedDeNoticiasComponent } from './feed-de-noticias/feed-de-noticias.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { DataFormEditModule } from './data-form-edit/data-form-edit.module';
     LoginComponent,
     PaginaNaoEncontradaComponent,
     HomeComponent,
+    FeedDeNoticiasComponent,
 
   ],
   imports: [
@@ -42,7 +45,8 @@ import { DataFormEditModule } from './data-form-edit/data-form-edit.module';
   providers: [
     AuthService, 
     AuthGuard,
-    DataGuard
+    DataGuard,
+    ManterDadosService
   ],
   bootstrap: [AppComponent]
 })

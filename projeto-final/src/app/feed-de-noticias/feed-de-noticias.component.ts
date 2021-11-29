@@ -1,21 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { EMPTY, empty, Observable, Subject } from 'rxjs';
-import { catchError, switchMap, take } from 'rxjs/operators';
-import { DenunciaCadastroDTO } from 'src/app/ModelDTO/DenunciaCadastroDTO';
-import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { ListaDenunciaService } from './services/lista-denuncia.service';
-import { ManterDadosService } from 'src/app/services/manter-dados.service';
-import { FormType } from 'src/app/shared/base-form/form-type';
+import { Observable, Subject, empty, EMPTY } from 'rxjs';
+import { catchError, take, switchMap } from 'rxjs/operators';
+import { ListaDenunciaService } from '../denuncias/lista-denuncia/services/lista-denuncia.service';
+import { DenunciaCadastroDTO } from '../ModelDTO/DenunciaCadastroDTO';
+import { ManterDadosService } from '../services/manter-dados.service';
+import { AlertModalService } from '../shared/alert-modal.service';
+import { FormType } from '../shared/base-form/form-type';
 
 @Component({
-  selector: 'app-lista-denuncia',
-  templateUrl: './lista-denuncia.component.html',
-  styleUrls: ['./lista-denuncia.component.css']
+  selector: 'app-feed-de-noticias',
+  templateUrl: './feed-de-noticias.component.html',
+  styleUrls: ['./feed-de-noticias.component.css']
 })
-export class ListaDenunciaComponent implements OnInit {
+export class FeedDeNoticiasComponent implements OnInit {
 
   deleteModalRef!: BsModalRef;
   @ViewChild('deleteModal', { static: true }) deleteModal: any;

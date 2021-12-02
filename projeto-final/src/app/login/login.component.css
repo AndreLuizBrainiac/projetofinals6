@@ -101,3 +101,14 @@ body {
 .remember {
     margin-right: 5px;
 }
+
+.menu{
+    background-color: rgb(211, 211, 211);
+	height: 62.5rem;
+}
+
+.h1{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+

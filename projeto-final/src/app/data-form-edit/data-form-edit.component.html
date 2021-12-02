@@ -1,4 +1,7 @@
 <div class="menu">
+  <h1 class="h1">Editar minha conta</h1>
+  <br>
+  <br>
   <form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
     <app-input-field class="col-sm-12" formControlName="nome" [classeCss]="aplicaCssErro('nome')" id="nome" label="Nome"
@@ -142,6 +145,7 @@
     <button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
     <br>
     <br>
+    <h1 class="h1">Projeto Sistemas &copy;</h1>
 
 
   </form>

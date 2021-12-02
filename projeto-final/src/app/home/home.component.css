@@ -1,3 +1,9 @@
 .menu{
-    margin-top: 80px;
+    margin-top: 120px;
+    background-color: rgb(211, 211, 211);
+    height: 50.5rem;
+}
+
+.h1{
+    font-family: 'Times New Roman', Times, serif;
 }

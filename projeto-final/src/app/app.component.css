@@ -6,3 +6,25 @@
 .p{
     color: black;
 }
+
+.body {
+    background-color: black;
+}
+
+.menu{
+    background-color: rgb(211, 211, 211);
+}
+
+.container{
+    background-color: rgb(211, 211, 211);
+   
+}
+.divall{
+    background-color: rgb(211, 211, 211);
+   
+    width: 100%;
+   
+    position:absolute;
+}
+
+

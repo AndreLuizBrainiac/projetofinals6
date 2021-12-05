@@ -1,47 +1,47 @@
 <div class="divall">
-<div class="menu">
-  <nav class="navbar navbar-default navbar-fixed-top" *ngIf="mostrarMenu">
-    <div class="container-fluid">
+  <div class="menu">
+    <nav class="navbar navbar-default navbar-fixed-top" *ngIf="mostrarMenu">
+      <div class="container-fluid">
 
-      <div class="navbar-header">
-        <a class="navbar-brand" routerLink="">Projeto Sistemas</a>
+        <div class="navbar-header">
+          <a class="navbar-brand" routerLink="">Projeto Sistemas</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+
+          <li routerLinkActive="active">
+            <a routerLink="/home">Home</a>
+          </li>
+
+          <li routerLinkActive="active">
+            <a routerLink="/feed">Feed de Noticias</a>
+          </li>
+
+          <li routerLinkActive="active">
+            <a routerLink="/cadastroDenuncia">Cadastro de denúncia</a>
+          </li>
+
+          <li routerLinkActive="active">
+            <a routerLink="/lista-denuncia">Listar minhas denúncias</a>
+          </li>
+
+          <li routerLinkActive="active">
+            <a routerLink="/editar-cadastro">Editar minha conta</a>
+          </li>
+
+          <li routerLinkActive="active">
+            <a (click)="logout()">Sair</a>
+          </li>
+
+
+
+
+        </ul>
       </div>
+    </nav>
+  </div>
 
-      <ul class="nav navbar-nav">
-
-        <li routerLinkActive="active">
-          <a routerLink="/home">Home</a>
-        </li>
-
-        <li routerLinkActive="active">
-          <a routerLink="/feed">Feed de Noticias</a>
-        </li>
-
-        <li routerLinkActive="active">
-          <a routerLink="/cadastroDenuncia">Cadastro de denúncia</a>
-        </li>
-
-        <li routerLinkActive="active">
-          <a routerLink="/lista-denuncia">Listar minhas denúncias</a>
-        </li>
-
-        <li routerLinkActive="active">
-          <a routerLink="/editar-cadastro">Editar minha conta</a>
-        </li>
-
-        <li routerLinkActive="active">
-          <a (click)="logout()">Sair</a>
-        </li>
-
-
-
-
-      </ul>
-    </div>
-  </nav>
-</div>
-
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>

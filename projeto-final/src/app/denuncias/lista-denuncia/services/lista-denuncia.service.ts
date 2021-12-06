@@ -25,6 +25,17 @@ export class ListaDenunciaService {
 
 
  
+ private listMinhasDenuncias() {
+
+  //endPoint a ser utilizado na API
+  let endPoint = 'conta/denuncias';
+  console.log(`${this.API}${endPoint}`);
+   
+
+  return this.http.get<DenunciaCadastroDTO[]>(`${this.API}${endPoint}`, {'headers':this.headers})
+  
+ }
+
  private listAll() {
 
   //endPoint a ser utilizado na API
@@ -54,6 +65,13 @@ export class ListaDenunciaService {
  list() {
  
    return this.listAll().pipe(
+    delay(2000),
+    tap(console.log));
+ }
+
+ listMinhasDenuncis() {
+ 
+    return this.listMinhasDenuncias().pipe(
     delay(2000),
     tap(console.log));
  }

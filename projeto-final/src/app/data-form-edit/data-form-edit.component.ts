@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { empty, EMPTY } from 'rxjs';
-import { distinctUntilChanged, tap, switchMap, map, take } from 'rxjs/operators';
+import { distinctUntilChanged, tap, switchMap, map, take, delay } from 'rxjs/operators';
 import { VerificaEmailService } from '../data-form/services/verifica-email.service';
 import { AuthService } from '../login/auth.service';
+import { Usuario } from '../login/usuario';
+import { UsuarioCadastroDTO } from '../ModelDTO/UsuarioCadastroDTO';
 import { AlertModalService } from '../shared/alert-modal.service';
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
 import { FormType } from '../shared/base-form/form-type';
@@ -42,7 +44,7 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
     private dataformService: DataFormEditService,
     private modal: AlertModalService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     super();
   }
@@ -55,9 +57,7 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
 
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(35)]],
-      email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
-      confirmarEmail: [null, [Validators.required, FormValidations.equalsTo('email')]],
-      senha: [null, [Validators.required, Validators.minLength(3)]],
+  //    email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
       documento: [null, [Validators.required, Validators.minLength(5)]],
       tel: [null, [Validators.required, Validators.minLength(3)]],
 
@@ -77,8 +77,9 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
     if(this.formtype==FormType.EDIT){
       let msgError = 'Erro ao recuperar usuario!, tente mais tarde';
      
-      this.dataformService.update().subscribe(
+      this.dataformService.getUser().subscribe(
         dados => {
+                 
                   this.populaDadosFormEdit(dados);
          
         },
@@ -101,6 +102,7 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
 
     this.formulario.get('endereco.estado')?.valueChanges
       .pipe(
+        delay(100),
         tap(estado => console.log('Novo estado: ', estado)),
         map(estado => this.estados?.filter(e => e.sigla === estado)),
         map((estados: any) => estados && estados.length > 0 ? estados[0].id : empty()),
@@ -122,7 +124,7 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
 
     
     // CHAMA PARA O SERVICE QUE UTILIZA A API DO PROJETO
-    this.dataformService.update().subscribe(
+    this.dataformService.update(valueSubmit).subscribe(
       success => {
         
         this.modal.showAlertSuccess(msgSuccess);
@@ -134,16 +136,9 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
         
   }
 
-  consultaCEP() {
-    const cep = this.formulario.get('endereco.cep')?.value;
-
-    if (cep != null && cep !== '') {
-      this.cepService.consultaCEP(cep)
-        .subscribe(dados => this.populaDadosForm(dados));
-    }
-  }
   
-  populaDadosFormEdit(dados: any) {
+  
+  populaDadosFormEdit(dados:any) {
 
     this.formulario.patchValue({
       nome: dados.nome,
@@ -154,11 +149,10 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
       tel: dados.tel,
 
       endereco: {
-        rua: dados.logradouro,
-        complemento: dados.complemento,
-        bairro: dados.bairro,
-        cidade: dados.localidade,
-        estado: dados.uf
+        cep: dados.endereco?.cep,
+        numero: dados.endereco?.numero,
+        complemento: dados.endereco?.complemento,
+       
       },
 
     });
@@ -170,7 +164,6 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
     this.formulario.patchValue({
       endereco: {
         rua: dados.logradouro,
-        complemento: dados.complemento,
         bairro: dados.bairro,
         cidade: dados.localidade,
         estado: dados.uf

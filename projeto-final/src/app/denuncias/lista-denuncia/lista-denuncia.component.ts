@@ -45,7 +45,7 @@ export class ListaDenunciaComponent implements OnInit {
 
   onRefresh() {
     
-    this.denuncias$ = this.listaDenunciaService.list().pipe(
+    this.denuncias$ = this.listaDenunciaService.listMinhasDenuncis().pipe(
       // map(),
       // tap(),
       // switchMap(),

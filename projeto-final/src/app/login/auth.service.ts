@@ -68,9 +68,9 @@ export class AuthService {
 
     this.login(user).subscribe(
       sucess => {
+        
         this.usuario = user;
-        console.log(this.usuario);
-
+       
         this.usuarioAutenticado = true;
 
         this.mostrarMenuEmitter.emit(true);

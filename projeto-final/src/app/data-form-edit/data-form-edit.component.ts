@@ -102,7 +102,7 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
 
     this.formulario.get('endereco.estado')?.valueChanges
       .pipe(
-        delay(100),
+        delay(300),
         tap(estado => console.log('Novo estado: ', estado)),
         map(estado => this.estados?.filter(e => e.sigla === estado)),
         map((estados: any) => estados && estados.length > 0 ? estados[0].id : empty()),
@@ -121,6 +121,7 @@ export class DataFormEditComponent extends BaseFormComponent implements OnInit {
     let valueSubmit = Object.assign({}, this.formulario.value);
     let msgSuccess  = 'Usuário atualizado com sucesso!';
     let msgError    = 'Erro ao atualizar o Usuario, tente novamente!';
+    console.log(JSON.stringify(valueSubmit))
 
     
     // CHAMA PARA O SERVICE QUE UTILIZA A API DO PROJETO
